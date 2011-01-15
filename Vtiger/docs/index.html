@@ -1,0 +1,314 @@
+<?xml version="1.0" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Vtiger - Interface to vtiger5.2 webservices</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<link rev="made" href="mailto:root@localhost" />
+</head>
+
+<body style="background-color: white">
+
+
+<!-- INDEX BEGIN -->
+<div name="index">
+<p><a name="__index__"></a></p>
+
+<ul>
+
+	<li><a href="#name">NAME</a></li>
+	<li><a href="#version">VERSION</a></li>
+	<li><a href="#synopsis">SYNOPSIS</a></li>
+	<li><a href="#crud">CRUD</a></li>
+	<ul>
+
+		<li><a href="#create">CREATE</a></li>
+		<li><a href="#retrieve">RETRIEVE</a></li>
+		<li><a href="#delete">DELETE</a></li>
+	</ul>
+
+	<li><a href="#subroutines_methods">SUBROUTINES/METHODS</a></li>
+	<ul>
+
+		<li><a href="#new">new</a></li>
+		<li><a href="#getsession">getSession</a></li>
+		<li><a href="#describe">describe</a></li>
+	</ul>
+
+	<li><a href="#author">AUTHOR</a></li>
+	<li><a href="#bugs">BUGS</a></li>
+	<li><a href="#support">SUPPORT</a></li>
+	<li><a href="#acknowledgements">ACKNOWLEDGEMENTS</a></li>
+	<li><a href="#license_and_copyright">LICENSE AND COPYRIGHT</a></li>
+</ul>
+
+<hr name="index" />
+</div>
+<!-- INDEX END -->
+
+<p>
+</p>
+<h1><a name="name">NAME</a></h1>
+<p>Vtiger - Interface to vtiger5.2 webservices</p>
+<p>
+</p>
+<hr />
+<h1><a name="version">VERSION</a></h1>
+<p>Version 0.01</p>
+<p>
+</p>
+<hr />
+<h1><a name="synopsis">SYNOPSIS</a></h1>
+<p>Handle the webservice interface to vtiger.</p>
+<p>The basic object in that transactions is $session that holds sessionName and userId values. This values will be used to perform request services</p>
+<pre>
+    use Vtiger;</pre>
+<pre>
+    my $vt       = new Vtiger();
+    my $usermane = 'admin';
+    my $pin      = 'f956n34fc6';
+    
+    my $session  = $vt-&gt;getSession($username, $pin);
+    
+With a 'Session Id' string we can perform querys:</pre>
+<pre>
+    my $contacts  = $vt-&gt;query(
+        $session-&gt;{'sessionName'},
+        &quot;select * from Contacts;&quot;
+      );</pre>
+<p>
+</p>
+<hr />
+<h1><a name="crud">CRUD</a></h1>
+<p>To change vtiger objects we need the userId holded by our session object.</p>
+<p>
+</p>
+<h2><a name="create">CREATE</a></h2>
+<pre>
+   # create a new contact
+   my $ctcData = {
+        'assigned_user_id'=&gt; $session-&gt;{'userId'},
+        'lastname'        =&gt; 'Filipo'
+       };</pre>
+<pre>
+    my $newContact = $vt-&gt;create(
+         $session-&gt;{'sessionName'},
+         'Contacts',
+         $ctcData
+        );</pre>
+<p>
+</p>
+<h2><a name="retrieve">RETRIEVE</a></h2>
+<pre>
+    my $retrieved =$vt-&gt;retrieve($session-&gt;{'sessionName'}, $contactId);
+    
+=head2 UPDATE</pre>
+<pre>
+    $retrieved-&gt;{'lastname'} = &quot;Filapo&quot;;</pre>
+<p>
+</p>
+<h2><a name="delete">DELETE</a></h2>
+<pre>
+    my $deleted =$vt-&gt;delete($session-&gt;{'sessionName'}, $contactId);</pre>
+<p>
+</p>
+<hr />
+<h1><a name="subroutines_methods">SUBROUTINES/METHODS</a></h1>
+<p>
+</p>
+<h2><a name="new">new</a></h2>
+<p>A Vtiger object can be instantiated by the new method.</p>
+<p>The module instance has blessed 4 attributes:</p>
+<ul>
+<li><strong><a name="ua_the_browser" class="item">ua: the browser</a></strong>
+
+<p>Instance of LWP::UserAgent</p>
+</li>
+<li><strong><a name="json_the_json_handler" class="item">json: the json handler</a></strong>
+
+<p>Instance of JSON</p>
+</li>
+<li><strong><a name="ctx_the_md5_handler" class="item">ctx: the MD5 handler</a></strong>
+
+<p>Instance of Digest::MD5</p>
+</li>
+<li><strong><a name="url_the_url_of_vtiger5_2_crm" class="item">url: the url of vtiger5.2 CRM</a></strong>
+
+</li>
+</ul>
+<p>
+</p>
+<h2><a name="getsession">getSession</a></h2>
+<p>Returns a session object.</p>
+<p>A session holds sessionName and userId values.</p>
+<p>This values must be used to identify the user in web services requests.</p>
+<pre>
+        my $sessionName = $session-&gt;{'sessionName'};
+        my $userId      = $session-&gt;{'userId'};</pre>
+<p>
+</p>
+<h2><a name="describe">describe</a></h2>
+<p>Returns the vtiger module descripton.</p>
+<pre>
+        my $description = $vt-&gt;describe{$sessionName, $module};
+        my @fieldNames  = @{$description-&gt;{'fields'}};</pre>
+<p>The description consists of the following fields:</p>
+<ul>
+<li><strong><a name="label_the_label_used_for_the_name_of_the_module" class="item">label - The label used for the name of the module.</a></strong>
+
+</li>
+<li><strong><a name="name_the_name_of_the_module" class="item">name - The name of the module.</a></strong>
+
+</li>
+<li><strong><a name="createable_a_boolean_value_specifying_whether_the_object_can_be_created" class="item">createable - A boolean value specifying whether the object can be created.</a></strong>
+
+</li>
+<li><strong><a name="updateable_a_boolean_value_specifying_whether_the_object_can_be_updated" class="item">updateable - A boolean value specifying whether the object can be updated.</a></strong>
+
+</li>
+<li><strong><a name="deleteable_a_boolean_value_specifying_whether_the_object_can_be_deleted" class="item">deleteable - A boolean value specifying whether the object can be deleted.</a></strong>
+
+</li>
+<li><strong><a name="retrieveable_a_boolean_value_specifying_whether_the_object_can_be_retrieved" class="item">retrieveable - A boolean value specifying whether the object can be retrieved.</a></strong>
+
+</li>
+<li><strong><a name="fields_an_array_containing_the_field_names_and_their_type_information" class="item">fields - An array containing the field names and their type information.</a></strong>
+
+</li>
+</ul>
+<p>Each element in the fields array describes a particular field in the object.</p>
+<ul>
+<li><strong><a name="name_the_name_of_the_field_as_used_internally_by_vtiger" class="item">name - The name of the field, as used internally by vtiger.</a></strong>
+
+</li>
+<li><strong><a name="label_the_label_used_for_displaying_the_field_name" class="item">label - The label used for displaying the field name.</a></strong>
+
+</li>
+<li><strong><a name="mandatory_this_is_a_boolean_that_specifies_whether_the_field_is_mandatory_mandatory_fields_must_be_provided_when_creating_a_new_object" class="item">mandatory - This is a boolean that specifies whether the field is mandatory, mandatory fields must be provided when creating a new object.</a></strong>
+
+</li>
+<li><strong><a name="type_an_map_that_describes_the_type_information_for_the_field" class="item">type - An map that describes the type information for the field.</a></strong>
+
+</li>
+<li><strong><a name="default_the_default_value_for_the_field" class="item">default - The default value for the field.</a></strong>
+
+</li>
+<li><strong><a name="nillable_a_boolean_that_specifies_whether_the_field_can_be_set_to_null" class="item">nillable - A boolean that specifies whether the field can be set to null.</a></strong>
+
+</li>
+<li><strong><a name="editable_a_boolean_that_specifies_whether_the_field_can_be_modified" class="item">editable - A boolean that specifies whether the field can be modified.</a></strong>
+
+</li>
+</ul>
+<p>The type field is of particular importance as it describes what type of the field is. This is an map that will contain at the least an element called name which is the name of the type. The name could be one of the following.</p>
+<ul>
+<li><strong><a name="string_a_one_line_text_field" class="item">string - A one line text field.</a></strong>
+
+</li>
+<li><strong><a name="text_a_multiline_text_field" class="item">text - A multiline text field.</a></strong>
+
+</li>
+<li><strong><a name="integer_a_non_decimal_number_field" class="item">integer - A non decimal number field.</a></strong>
+
+</li>
+<li><strong><a name="double_a_field_for_for_floating_point_numbers" class="item">double - A field for for floating point numbers.</a></strong>
+
+</li>
+<li><strong><a name="boolean_a_boolean_field_can_have_the_values_true_or_false" class="item">boolean - A boolean field, can have the values true or false.</a></strong>
+
+</li>
+<li><strong><a name="time_a_string_of_the_format_hh_mm_format_is_based_on_the_user_s_settings_time_format" class="item">time - A string of the format hh:mm, format is based on the user's settings time format.</a></strong>
+
+</li>
+<li><strong><a name="date_a_string_representing_a_date_the_type_map_will_contain_another_element_called_format_which_is_the_format_in_which_the_value_of_this_field_is_expected_its_based_on_the_user_s_settings_date_format" class="item">date - A string representing a date, the type map will contain another element called format which is the format in which the value of this field is expected, its based on the user's settings date format.</a></strong>
+
+</li>
+<li><strong><a name="datetime_a_string_representing_the_date_and_time_the_format_is_base_on_the_user_s_settings_date_format" class="item">datetime - A string representing the date and time, the format is base on the user's settings date format.</a></strong>
+
+</li>
+<li><strong><a name="autogenerated_thes_are_fields_for_which_the_values_are_generated_automatically_by_vtiger_this_is_usually_an_object_s_id_field" class="item">autogenerated - Thes are fields for which the values are generated automatically by vtiger, this is usually an object's id field.</a></strong>
+
+</li>
+<li><strong><a name="reference_a_field_that_shows_a_relation_to_another_object_the_type_map_will_contain_another_element_called_refersto_which_is_an_array_containing_the_name_of_modules_of_which_the_field_can_point_to" class="item">reference - A field that shows a relation to another object, the type map will contain another element called refersTo which is an array containing the name of modules of which the field can point to.</a></strong>
+
+</li>
+<li><strong><a name="picklist_a_field_that_can_a_hold_one_of_a_list_of_values_the_map_will_contain_two_elements_picklistvalues_which_is_a_list_of_possible_values_and_defaultvalue_which_is_the_default_value_for_the_picklist" class="item">picklist - A field that can a hold one of a list of values, the map will contain two elements, picklistValues which is a list of possible values, and defaultValue which is the default value for the picklist.</a></strong>
+
+</li>
+<li><strong><a name="multipicklist_a_picklist_field_where_multiple_values_can_be_selected" class="item">multipicklist - A picklist field where multiple values can be selected.</a></strong>
+
+</li>
+<li><strong><a name="phone_a_field_for_storing_phone_numbers" class="item">phone - A field for storing phone numbers</a></strong>
+
+</li>
+<li><strong><a name="email_a_field_for_storing_email_ids" class="item">email - A field for storing email ids</a></strong>
+
+</li>
+<li><strong><a name="url_a_field_for_storing_urls" class="item">url - A field for storing urls</a></strong>
+
+</li>
+<li><strong><a name="skype_a_field_for_storing_skype_ids_or_phone_numbers" class="item">skype - A field for storing skype ids or phone numbers.</a></strong>
+
+</li>
+<li><strong><a name="password_a_field_for_storing_passwords" class="item">password - A field for storing passwords.</a></strong>
+
+</li>
+<li><strong><a name="owner_a_field_for_defining_the_owner_of_the_field_which_could_be_a_group_or_individual_user" class="item">owner - A field for defining the owner of the field. which could be a group or individual user.</a></strong>
+
+</li>
+</ul>
+<p>
+</p>
+<hr />
+<h1><a name="author">AUTHOR</a></h1>
+<p>Monsenhor, <code>&lt;ricardo.filipo at gmail.com&gt;</code></p>
+<p>
+</p>
+<hr />
+<h1><a name="bugs">BUGS</a></h1>
+<p>Please report any bugs or feature requests to <code>bug-vtiger at rt.cpan.org</code>, or through
+the web interface at <a href="http://rt.cpan.org/NoAuth/ReportBug.html?Queue=Vtiger">http://rt.cpan.org/NoAuth/ReportBug.html</a>.  I will be notified, and then you'll
+automatically be notified of progress on your bug as I make changes.</p>
+<p>
+</p>
+<hr />
+<h1><a name="support">SUPPORT</a></h1>
+<p>You can find documentation for this module with the perldoc command.</p>
+<pre>
+    perldoc Vtiger</pre>
+<p>You can also look for information at:</p>
+<ul>
+<li><strong><a name="rt_cpan_s_request_tracker" class="item">RT: CPAN's request tracker</a></strong>
+
+<p><a href="http://rt.cpan.org/NoAuth/Bugs.html?Dist=Vtiger">http://rt.cpan.org/NoAuth/Bugs.html</a></p>
+</li>
+<li><strong><a name="annocpan_annotated_cpan_documentation" class="item">AnnoCPAN: Annotated CPAN documentation</a></strong>
+
+<p><a href="http://annocpan.org/dist/Vtiger">http://annocpan.org/dist/Vtiger</a></p>
+</li>
+<li><strong><a name="cpan_ratings" class="item">CPAN Ratings</a></strong>
+
+<p><a href="http://cpanratings.perl.org/d/Vtiger">http://cpanratings.perl.org/d/Vtiger</a></p>
+</li>
+<li><strong><a name="search_cpan" class="item">Search CPAN</a></strong>
+
+<p><a href="http://search.cpan.org/dist/Vtiger/">http://search.cpan.org/dist/Vtiger/</a></p>
+</li>
+</ul>
+<p>
+</p>
+<hr />
+<h1><a name="acknowledgements">ACKNOWLEDGEMENTS</a></h1>
+<p>
+</p>
+<hr />
+<h1><a name="license_and_copyright">LICENSE AND COPYRIGHT</a></h1>
+<p>Copyright 2011 Monsenhor.</p>
+<p>This program is free software; you can redistribute it and/or modify it
+under the terms of either: the GNU General Public License as published
+by the Free Software Foundation; or the Artistic License.</p>
+<p>See <a href="http://dev.perl.org/licenses/">http://dev.perl.org/licenses/</a> for more information.</p>
+
+</body>
+
+</html>

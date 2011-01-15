@@ -1,0 +1,34 @@
+(Filo Synodos) φιλος Συνοδος
+
+
+The Filo Synodos BPM issues
+WHAT – WHEN – WHO – WHY - WHERE – HOW
+
+* Create new Project
+* Create new Contact
+* Create new Account
+* Create new Event
+* Create new Document
+* Send E-mail
+
+* Send SMS
+
+Ao pensar o Gerenciamento eficaz aparece a importância de reunir todos e tudo que se inserem no empreendimento.
+
+os pilares fundamentais de uma boa administração: estratégia, arquitetura, engenharia e governança.
+
+Estratégia: aponta os caminhos.
+Arquitetura: focada no planejamento.
+Engenharia: constrói e operacionaliza todos os componentes definidos na arquitetura. 
+Governança: institui o modelo que compatibiliza a estratégia, a arquitetura e a engenharia.
+
+Arquitetura Organizacional a partir da Gestão por Processos de Negócios (BPM) alinhada com a Arquitetura da Informação, Arquitetura de Sistemas Aplicativos e Projeto de Sistemas Aplicativos. 
+
+Clay Richardson:
+* Conecte a Arquitetura de Negócios com as iniciativas de BPM para criar um roteiro realista no processo de transformação;
+* Dê "direitos iguais" nas iniciativas de BPM e a manutenção dos dados;
+* Promova competências em BPM para as funções-chave nos processos que compõem a cadeia de valor da organização;
+* Procure criar condições para melhor desenvolver a participação colaborativa de todos nos processos da cadeia de valor;
+* Procure identificar as melhores práticas de programas bem-sucedidos na implementação de iniciativas BPM.
+
+ 

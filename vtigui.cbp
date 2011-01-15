@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="vtigui" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug">
+				<Option output="bin/Debug/vtigui" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Debug/" />
+				<Option type="0" />
+				<Option compiler="gcc" />
+				<Option projectLinkerOptionsRelation="2" />
+				<Compiler>
+					<Add option="-w" />
+					<Add option="-g" />
+					<Add option="-static `perl -MExtUtils::Embed -e ldopts`" />
+					<Add directory="/usr/lib/perl/5.10/CORE" />
+				</Compiler>
+				<Linker>
+					<Add library="/usr/lib/libperl.so.5.10.0" />
+					<Add library="/usr/lib/perl/5.10/auto/B/B.so" />
+				</Linker>
+			</Target>
+			<Target title="Release">
+				<Option output="bin/Release/vtigui" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Release/" />
+				<Option type="0" />
+				<Option compiler="gcc" />
+				<Option projectLinkerOptionsRelation="2" />
+				<Compiler>
+					<Add option="-O2" />
+					<Add directory="/usr/lib/perl/5.10/CORE" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+					<Add library="/usr/lib/libperl.so.5.10.0" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="`wx-config --cflags`" />
+			<Add option="-Wall" />
+		</Compiler>
+		<Linker>
+			<Add option="`wx-config --libs`" />
+		</Linker>
+		<Unit filename="config/config.xml" />
+		<Unit filename="perlxsi.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="scripts/vtiger.pl" />
+		<Unit filename="test.pl" />
+		<Unit filename="vtiguiApp.cpp" />
+		<Unit filename="vtiguiApp.h" />
+		<Unit filename="vtiguiMain.cpp" />
+		<Unit filename="vtiguiMain.h" />
+		<Unit filename="wxperl.cpp" />
+		<Unit filename="wxperl.h" />
+		<Unit filename="wxsmith/vtiguiframe.wxs" />
+		<Extensions>
+			<envvars />
+			<code_completion />
+			<lib_finder disable_auto="1" />
+			<wxsmith version="1">
+				<gui name="wxWidgets" src="vtiguiApp.cpp" main="vtiguiFrame" init_handlers="necessary" language="CPP" />
+				<resources>
+					<wxFrame wxs="wxsmith/vtiguiframe.wxs" src="vtiguiMain.cpp" hdr="vtiguiMain.h" name="vtiguiFrame" language="CPP" />
+				</resources>
+			</wxsmith>
+			<debugger />
+			<AutoVersioning>
+				<Scheme minor_max="10" build_max="0" rev_max="0" rev_rand_max="10" build_times_to_increment_minor="100" />
+				<Settings autoincrement="1" date_declarations="1" do_auto_increment="0" ask_to_increment="0" language="C++" svn="0" svn_directory="" header_path="version.h" />
+				<Changes_Log show_changes_editor="1" app_title="released version %M.%m.%b of %p" changeslog_path="ChangesLog.txt" />
+			</AutoVersioning>
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>

@@ -1,0 +1,15 @@
+14 janeiro 2011
+   released version 0.1.2 of vtigui
+
+     Change log:
+        -Added: use Vtiger module
+        -Added: error handling in perl
+
+11 janeiro 2011
+   released version 0.1.1 of vtigui
+
+     Change log:
+        -Added: error handling
+        -Added: perl bidings
+        -Added: vtiger services
+

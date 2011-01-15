@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_layout_file>
+	<ActiveTarget name="Debug" />
+	<File name="config/config.xml" open="0" top="0" tabpos="4">
+		<Cursor position="172" topLine="0" />
+	</File>
+	<File name="perlxsi.c" open="1" top="0" tabpos="6">
+		<Cursor position="56" topLine="0" />
+	</File>
+	<File name="scripts/vtiger.pl" open="1" top="0" tabpos="4">
+		<Cursor position="2938" topLine="95" />
+	</File>
+	<File name="test.pl" open="0" top="0" tabpos="0">
+		<Cursor position="631" topLine="12" />
+	</File>
+	<File name="vtiguiApp.cpp" open="0" top="0" tabpos="0">
+		<Cursor position="493" topLine="1" />
+	</File>
+	<File name="vtiguiMain.cpp" open="1" top="1" tabpos="3">
+		<Cursor position="26820" topLine="417" />
+	</File>
+	<File name="vtiguiMain.h" open="1" top="0" tabpos="5">
+		<Cursor position="1661" topLine="30" />
+	</File>
+	<File name="wxperl.cpp" open="1" top="0" tabpos="1">
+		<Cursor position="0" topLine="0" />
+	</File>
+	<File name="wxperl.h" open="1" top="0" tabpos="2">
+		<Cursor position="304" topLine="0" />
+	</File>
+</CodeBlocks_layout_file>

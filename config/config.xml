@@ -1,0 +1,7 @@
+<config>
+      <module name='main'>
+            <constant name='USER_NAME' value='admin' />
+            <constant name='ACCESS_KEY' value='xBNhY4gLb9lnp2k2' />
+            <constant name='VTIGER_URL' value='http://127.0.0.1/vtiger/webservice.php' />
+      </module>
+  </config>
